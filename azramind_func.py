@@ -8,7 +8,9 @@ import sys
 
 # turn it into a string to make it easier to compare with inputs
 def azramind(code_list, limit):
-    print(code_list)
+
+    # uncomment below to see the code list:
+    # print(code_list)
 
     code_str = "".join(code_list)
     guesses = []
