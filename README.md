@@ -21,5 +21,6 @@ Known issues:
 - App accepts non-alpha numeric characters as username
 
 
-Known feedback:
+Known usability feedback:
+- Difficulty level is confusing
 - add the digits and locations guessed correctly with each turn so user doesn't have to scroll up as much
