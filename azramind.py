@@ -5,11 +5,11 @@ import sys
 
 
 # URL to access the API
-URL = "https://www.random.org/integers/"
+INT_URL = "https://www.random.org/integers/"
 
 # API parameters
 
-PARAMS = {
+INT_PARAMS = {
     'num': 4,  # num digits requested
     'min': 0,  # min int
     'max': 4,  # max int
@@ -20,19 +20,20 @@ PARAMS = {
 }
 
 # function inside util.py accesses API to generate code list in string format
-code_str_list = get_code_list(URL, PARAMS)
+code_str_list = get_code_list(INT_URL, INT_PARAMS)
 print(code_str_list)
 
 code_str = "".join(code_str_list)
 
 # 110
 
-tries = 1
+
 limit = 10
 
 n = input(" Pick 4 numbers between 0 and 7 to guess the 4 digit code:")
 
 
+tries = 1
 while (n != code_str and tries < limit):
 
     # variable increments every time the loop
@@ -44,7 +45,6 @@ while (n != code_str and tries < limit):
     black = 0
     white = 0
 
-    
     # making copies of code_str_list to manipulate as needed
     black_temp_code = code_str_list.copy()
     white_temp_code = code_str_list.copy()
