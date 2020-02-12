@@ -1,7 +1,7 @@
 
 To Play the game:
 
-This is a command-line game written in Python with a backend and API written in Flask
+This is a command-line game written in Python with a backend and API written in Python/Flask
 
 I taught myself how to build a backend in Python/Flask in 3 days to write this program in an Object Oriented Language. 
 
