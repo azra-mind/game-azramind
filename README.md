@@ -17,6 +17,7 @@ I taught myself how to build a backend in Python/Flask in 3 days to write this p
 
 Known issues:
 - App errors out if you put a non-integer. App also does not check if the code input is >4 digits
+- some issues with saving
 - App accepts non-alpha numeric characters as username
 
 
