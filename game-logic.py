@@ -3,7 +3,7 @@ from requests.exceptions import HTTPError
 import sys
 
 from azramind_func import azramind
-from util import game_rules, get_code_list
+from util import game_rules, get_code_list, quit_function
 
 
 # url for the api for the backend that I built for this project
@@ -16,23 +16,24 @@ q = False
 while q is False:
 
     # number of tries a player gets to guess the code.
-    limit = 11
+    limit = 10
     command = input(
         '''Please enter a command:
     1 Play the game
     2 rules of the game
-    3 view scores
-    q quit game
+    3 view past scores
+    q to quit game at any time
             ''')
 
     # lowercase + remove white spaces
     command = command.lower().strip()
 
     if command == "1":
-        print("""\n\nSo, you want to try your luck? First, you must tell me who you are \n\n""")
+        print("""\n\nSo, you want to try your luck? First, you must tell me who you are. \n\n""")
 
         # while I don't have a valid username
         user_obj = None
+
         # this loop saves the username object so we can save scores
         while user_obj is None:
             # initializing the response object
@@ -45,11 +46,18 @@ while q is False:
 
             command = command.lower().strip()
 
+            # quit if user enters q or quit
+            quit_function(command)
+
             if command not in {'a', 'b'}:
                 print('\nInvalid input, please enter a or b\n')
 
             else:
                 username_input = input("Enter username: ").lower().strip()
+
+                # quit if user enters q or quit
+                quit_function(username_input)
+
                 username_obj = {"username": f"{username_input}"}
                 username_url = f"{BASE_API_URL}/user"
 
@@ -73,6 +81,8 @@ while q is False:
                 if 'message' in response:
                     print(response['message'])
 
+        # once we have a valid username, we can play the game
+
         # URL to access the random number generator API
         INT_URL = "https://www.random.org/integers/"
 
@@ -93,9 +103,8 @@ while q is False:
         except:
             print("the code couldn't be generated, we can't play the game!")
 
-        score_obj = azramind(code_list, limit=11)
-        print(f"{score_obj} \n")
-        print(f"{user_obj}\n")
+        score_obj = azramind(code_list, limit=10)
+
         score_obj["user_id"] = user_obj["id"]
         score_url = f"{BASE_API_URL}/score"
 
@@ -107,8 +116,12 @@ while q is False:
 
     elif command == "3":
         username = input("Please enter your username to view past scores: ")
+
+        # quit if user enters q or quit
+        quit_function(username_input)
+
         GET_SCORES_URL = f"{BASE_API_URL}/{username}/scores"
-        print(GET_SCORES_URL)
+
         response = requests.get(url=GET_SCORES_URL).json()
 
         if response:

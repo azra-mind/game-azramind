@@ -36,3 +36,26 @@ def game_rules(limit=10):
     *I will also disclose the number of digits you guessed correctly without guessing their correct placement.
     *If you are able to guess the code correctly in {limit} tries, you become a Mastermind!
     ''')
+
+
+def quit_function(string):
+    if string.lower() in {"q", "quit"}:
+
+        sys.exit("\nthank you for playing Azramind, good bye\n")
+
+
+# this function validates guesses and
+def validate_guess(string, n=4):
+
+    message = "Invalid input, your input must be a 4 digit integer"
+
+    if len(string) != n:
+        print(message)
+        return False
+    try:
+        int(string)
+    except ValueError:
+        print(message)
+        return False
+
+    return True
