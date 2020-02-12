@@ -1,80 +1,93 @@
 import requests
 from requests.exceptions import HTTPError
 import sys
+from util import quit_function, validate_guess
 
 
-# API parameters
-
-
-# turn it into a string to make it easier to compare with inputs
 def azramind(code_list, limit):
 
-    # uncomment below to see the code list:
+    # uncomment below to see the code list for debugging etc:
     # print(code_list)
 
     code_str = "".join(code_list)
-    guesses = []
 
-    n = input(" Pick 4 numbers between 0 and 7 to guess the 4 digit code:\n")
+    # this is where we'll keep track of guesses and results
+    guess_results = []
 
-    guesses.append(int(n))
+    print(" Enter 4 integers between 0 and 7 to guess the 4 digit code.\n")
 
-    tries = 1
-    while (n != code_str and tries < limit):
+    # the variable where we store user guesses
+    guess = None
+
+    tries = 0
+    while (guess != code_str and tries < limit+1):
+
+        guess = (input("\nEnter your guess here: "))
+
+        # if user inputs q or quit, this function exits the program
+        quit_function(guess)
+
+        # function that validates the guess is a 4 digit integer
+        valid_guess = validate_guess(guess)
 
         # guesses that were made.
-        tries += 1
+        if valid_guess:
+            tries += 1
 
-    # like the boardgame, black = count of correct number + location, white = correct # only
-        black = 0
-        white = 0
+            # like the boardgame, black = # of correct number + location, white = correct # only
+            black = 0
+            white = 0
 
-        # making copies of code_str_list to manipulate as needed
-        black_temp_code = code_list.copy()
-        white_temp_code = code_list.copy()
+            # making copies of the code list to check for equality of digits and manipulate as needed to avoid pass by reference errors
+            black_temp_code = code_list.copy()
+            white_temp_code = code_list.copy()
 
-        for i in range(0, len(code_list)):
+            for i in range(0, len(code_list)):
 
-            # checking for equality of digit + location
-            if (n[i] == black_temp_code[i]):
-                # number of digits + locations guessed correctly increments
-                black += 1
+                # checking for equality of digit + location
+                if (guess[i] == black_temp_code[i]):
 
-            # checking for equality of digit only
-            if(n[i] in white_temp_code):
-                # number of digit guessed correctly increments
-                white += 1
+                    # number of digits + locations guessed correctly increments
+                    black += 1
 
-                # remove the digit to avoid double counting
-                white_temp_code.remove(n[i])
+                # checking for equality of digit only
+                if(guess[i] in white_temp_code):
 
-        # number of times digits guessed correctly but location guessed incorrectly
-        white = white-black
+                    # number of digits guessed correctly increments
+                    white += 1
 
-        # if not all the digits are guessed correctly:
-        if (black != 4):
-            if (black > 0):
-                print(
-                    f"\nYou guessed {black} digits including their placement correctly")
-            if (white > 0):
-                print(
-                    f"\nYou guessed {white} digits correctly but got their placement wrong")
+                    # remove digit to avoid double counting
+                    white_temp_code.remove(guess[i])
 
-            if (black == 0 and white == 0):
-                print("None of the numbers in your input match.")
+            # number of times digits guessed correctly but location guessed incorrectly
+            white = white-black
 
-            print(f"\nyou have {limit-tries} tries remaining")
-            print("\nthese are your previous tries:")
-            for g in guesses:
-                print(g)
+            # if not all the digits guessed correctly:
+            if (black != 4):
+                if (black > 0):
+                    print(
+                        f"\nYou guessed {black} digits including their placement correctly")
+                if (white > 0):
+                    print(
+                        f"\nYou guessed {white} digits correctly but got their placement wrong")
 
-            n = (input("\nEnter your next choice of numbers: "))
-            guesses.append(int(n))
+                if (black == 0 and white == 0):
+                    print("None of the numbers in your input match.")
 
-        # when none of the digits are guessed correctly.
+                guess_results.append({
+                    'guess': guess,
+                    'correct digit & placement': black,
+                    'correct digit only': white,
+                    'guesses remaining': (limit-tries)
+                })
 
-    # condition for equality.
-    if n == code_str:
+                print(f"\nyou have {limit-tries} guesses remaining")
+                print("\nthese are your previous guesses:")
+                for g in guess_results:
+                    print(g)
+
+    # out of the while loopconditions for equality or reaching the guess limit
+    if guess == code_str:
         print("You've become a Mastermind!")
         if tries == 1:
             print(f"WHOA!! You guessed it right on the first try that's impressive!!")
