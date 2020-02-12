@@ -26,9 +26,13 @@ def get_code_list(URL, PARAMS):
     return num_str_list
 
 
-def count_white(x):
-    pass
+def game_rules(limit=10):
 
-
-def count_black(x):
-    pass
+    print(f'''
+    THESE ARE THE RULES:
+    *I will select 4 random integers from 0 to 7. 
+    *You have {limit} tries to guess which 4 integers I've selected.
+    *After each try, I will disclose the number of digits and their placement you guessed correctly.
+    *I will also disclose the number of digits you guessed correctly without guessing their correct placement.
+    *If you are able to guess the code correctly in {limit} tries, you become a Mastermind!
+    ''')
