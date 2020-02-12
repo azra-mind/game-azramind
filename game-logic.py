@@ -108,12 +108,13 @@ while q is False:
     elif command == "3":
         username = input("Please enter your username to view past scores: ")
         GET_SCORES_URL = f"{BASE_API_URL}/{username}/scores"
+        print(GET_SCORES_URL)
         response = requests.get(url=GET_SCORES_URL).json()
 
         if response:
             if 'message' in response:
                 print(response)
-            elif 'score' in response:
+            elif 'scores' in response:
                 for score in response['scores']:
                     print(score)
             else:
