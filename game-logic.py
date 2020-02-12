@@ -1,20 +1,22 @@
 import requests
-import requests
 from requests.exceptions import HTTPError
-from util import get_code_list
 import sys
 
 from azramind_func import azramind
-from util import get_code_list
+from util import game_rules, get_code_list
+
 
 # url for the api for the backend that I built for this project
-# BASE_API_URL = "https://azramind.herokuapp.com"
-BASE_API_URL = "http://localhost:5000"
+BASE_API_URL = "https://azramind.herokuapp.com"
+# BASE_API_URL = "http://localhost:5000"
 
 
 print("\nWelcome to Azramind! A game where you must guess the code to win. Do you have what it takes?\n\n")
 q = False
 while q is False:
+
+    # number of tries a player gets to guess the code.
+    limit = 10
     command = input(
         '''Please enter a command:
     1 Play the game
@@ -28,9 +30,9 @@ while q is False:
 
     if command == "1":
         print("""\n\nSo, you want to try your luck? First, you must tell me who you are \n\n""")
-        # while I don't have a user_obj
-        user_obj = None
 
+        # while I don't have a valid username
+        user_obj = None
         # this loop saves the username object so we can save scores
         while user_obj is None:
             # initializing the response object
@@ -44,7 +46,7 @@ while q is False:
             command = command.lower().strip()
 
             if command not in {'a', 'b'}:
-                print('\nInvalid input, please enter a or b or q to quit game\n')
+                print('\nInvalid input, please enter a or b\n')
 
             else:
                 username_input = input("Enter username: ").lower().strip()
@@ -52,7 +54,7 @@ while q is False:
                 username_url = f"{BASE_API_URL}/user"
 
                 if command == "a":
-                    print("you selected a")
+
                     # put the conditions for username creation here:
                     if len(username_input) < 4:
                         print('\nyour username must be at least 4 characters long\n')
@@ -61,14 +63,13 @@ while q is False:
                             username_url, data=username_obj).json()
 
                 if command == "b":
-                    print("you selected b")
+
                     response = requests.get(
                         username_url, data=username_obj).json()
 
             if response:
                 if 'username' in response:
                     user_obj = response
-                    print('we got the user_obj!', user_obj)
                 if 'message' in response:
                     print(response['message'])
 
@@ -97,11 +98,13 @@ while q is False:
         print(f"{user_obj}\n")
         score_obj["user_id"] = user_obj["id"]
         score_url = f"{BASE_API_URL}/score"
+
+        # posting the score to the scores table
         response = requests.post(score_url, data=score_obj).json()
-        print(response)
 
     elif command == "2":
-        print("\nrules are the rules!!\n\n")
+        game_rules(limit)
+        
 
     elif command == "3":
         username = input("Please enter your username to view past scores: ")
