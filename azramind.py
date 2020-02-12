@@ -27,12 +27,13 @@ code_str = "".join(code_str_list)
 
 # 110
 
-tries = 1
+
 limit = 10
 
 n = input(" Pick 4 numbers between 0 and 7 to guess the 4 digit code:")
 
 
+tries = 1
 while (n != code_str and tries < limit):
 
     # variable increments every time the loop
