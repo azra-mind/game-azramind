@@ -16,7 +16,7 @@ q = False
 while q is False:
 
     # number of tries a player gets to guess the code.
-    limit = 10
+    limit = 11
     command = input(
         '''Please enter a command:
     1 Play the game
@@ -91,9 +91,9 @@ while q is False:
         try:
             code_list = get_code_list(INT_URL, INT_URL_PARAMS)
         except:
-            print("the code list couldn't be generated, we can't play the game!")
+            print("the code couldn't be generated, we can't play the game!")
 
-        score_obj = azramind(code_list, limit=10)
+        score_obj = azramind(code_list, limit=11)
         print(f"{score_obj} \n")
         print(f"{user_obj}\n")
         score_obj["user_id"] = user_obj["id"]
@@ -104,7 +104,6 @@ while q is False:
 
     elif command == "2":
         game_rules(limit)
-        
 
     elif command == "3":
         username = input("Please enter your username to view past scores: ")
