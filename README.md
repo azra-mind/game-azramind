@@ -23,4 +23,6 @@ Known issues:
 
 Known usability feedback:
 - Difficulty level is confusing
+- clean up the scores view a bit
+- add date-time to past scores
 - add the digits and locations guessed correctly with each turn so user doesn't have to scroll up as much
