@@ -85,6 +85,7 @@ while q is False:
             if response:
                 if 'username' in response:
                     user_obj = response
+                    print(f"Hello, {response['username']}")
                 if 'message' in response:
                     print(response['message'])
 
