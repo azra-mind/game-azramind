@@ -4,7 +4,7 @@ import sys
 from util import quit_function, validate_guess
 
 
-def azramind(code_list, limit):
+def azramind(code_list, limit=10, difficulty=4):
 
     # uncomment below to see the code list for debugging etc:
     # print(code_list)
@@ -14,7 +14,8 @@ def azramind(code_list, limit):
     # this is where we'll keep track of guesses and results
     guess_results = []
 
-    print(" Enter 4 integers between 0 and 7 to guess the 4 digit code.\n")
+    print(
+        f"Enter {difficulty} integers between 0 and 7 to guess the {difficulty} digit code.\n")
 
     # the variable where we store user guesses
     guess = None
@@ -28,7 +29,7 @@ def azramind(code_list, limit):
         quit_function(guess)
 
         # function that validates the guess is a 4 digit integer
-        valid_guess = validate_guess(guess)
+        valid_guess = validate_guess(guess, difficulty)
 
         # guesses that were made.
         if valid_guess:
@@ -63,7 +64,7 @@ def azramind(code_list, limit):
             white = white-black
 
             # if not all the digits guessed correctly:
-            if (black != 4):
+            if (black != difficulty):
                 if (black > 0):
                     print(
                         f"\nYou guessed {black} digits including their placement correctly")
