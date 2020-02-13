@@ -7,8 +7,8 @@ from util import game_rules, get_code_list, quit_function
 
 
 # url for the api for the backend that I built for this project
-BASE_API_URL = "https://azramind.herokuapp.com"
-# BASE_API_URL = "http://localhost:5000"
+# BASE_API_URL = "https://azramind.herokuapp.com"
+BASE_API_URL = "http://localhost:5000"
 
 
 print("\nWelcome to Azramind! A game where you must guess the code to win. Do you have what it takes?\n\n")
@@ -16,7 +16,7 @@ q = False
 while q is False:
 
     # number of tries a player gets to guess the code.
-    limit = 10
+
     command = input(
         '''Please enter a command:
     1 Play the game
@@ -28,8 +28,15 @@ while q is False:
     # lowercase + remove white spaces
     command = command.lower().strip()
 
+    # number of attempts the user gets
+    limit = 10
+
+    # number of digits to guess
+    difficulty = 4
+
     if command == "1":
-        print("""\n\nSo, you want to try your luck? First, you must tell me who you are. \n\n""")
+        print(
+            """\nSo, you want to try your luck? First, you must tell me who you are. \n""")
 
         # while I don't have a valid username
         user_obj = None
@@ -64,8 +71,8 @@ while q is False:
                 if command == "a":
 
                     # put the conditions for username creation here:
-                    if len(username_input) < 4:
-                        print('\nyour username must be at least 4 characters long\n')
+                    if len(username_input) < 3:
+                        print('\nyour username must be at least 3 characters long\n')
                     else:
                         response = requests.post(
                             username_url, data=username_obj).json()
@@ -81,16 +88,14 @@ while q is False:
                 if 'message' in response:
                     print(response['message'])
 
-        # once we have a valid username, we can play the game
-
         # URL to access the random number generator API
         INT_URL = "https://www.random.org/integers/"
 
         # INT_URL parameters
         INT_URL_PARAMS = {
-            'num': 4,  # num digits requested
+            'num': difficulty,  # num digits requested
             'min': 0,  # min int
-            'max': 4,  # max int
+            'max': 7,  # max int
             'col': 1,
             'base': 10,
             'format': 'plain',
@@ -103,7 +108,8 @@ while q is False:
         except:
             print("the code couldn't be generated, we can't play the game!")
 
-        score_obj = azramind(code_list, limit=10)
+        # this is
+        score_obj = azramind(code_list, limit, difficulty)
 
         score_obj["user_id"] = user_obj["id"]
         score_url = f"{BASE_API_URL}/score"
@@ -112,13 +118,14 @@ while q is False:
         response = requests.post(score_url, data=score_obj).json()
 
     elif command == "2":
-        game_rules(limit)
+        game_rules(limit, difficulty)
 
     elif command == "3":
-        username = input("Please enter your username to view past scores: ")
+        username = input(
+            "Please enter your username to view past scores: ")
 
         # quit if user enters q or quit
-        quit_function(username_input)
+        quit_function(username)
 
         GET_SCORES_URL = f"{BASE_API_URL}/{username}/scores"
 
@@ -129,7 +136,11 @@ while q is False:
                 print(response)
             elif 'scores' in response:
                 for score in response['scores']:
-                    print(score)
+                    print({
+                        "date and time": score["date_time"],
+                        "guesses": score["num_tries"],
+                        "digits guessed": score["difficulty"]
+                    })
             else:
                 print('something went wrong, we had trouble retrieving your scores')
 

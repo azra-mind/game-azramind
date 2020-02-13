@@ -14,11 +14,11 @@ def get_code_list(URL, PARAMS):
     except HTTPError as http_err:
         # Python 3.6
         sys.exit(
-            f'HTTP error, unable to generate 4 digit code from random Integer API: {http_err}')
+            f'HTTP error, unable to generate code from random Integer API: {http_err}')
     except Exception as err:
         # Python 3.6
         sys.exit(
-            f'Other error occurred, unable to generate 4 digit code from random Integer API: {err}')
+            f'Other error occurred, unable to generate code from random Integer API: {err}')
 
     # a list of number strings from the response
     num_str_list = response.text.splitlines()
@@ -26,15 +26,15 @@ def get_code_list(URL, PARAMS):
     return num_str_list
 
 
-def game_rules(limit=10):
+def game_rules(limit=10, difficulty=4):
 
     print(f'''
     THESE ARE THE RULES:
-    *I will select 4 random integers from 0 to 7. 
-    *You have {limit} tries to guess which 4 integers I've selected.
+    *I will select {difficulty} random integers from 0 to 7. 
+    *You have {difficulty} tries to guess which {difficulty} integers I've selected.
     *After each try, I will disclose the number of digits and their placement you guessed correctly.
     *I will also disclose the number of digits you guessed correctly without guessing their correct placement.
-    *If you are able to guess the code correctly in {limit} tries, you become a Mastermind!
+    *If you are able to guess the code correctly in {difficulty} tries, you become a Mastermind!
     ''')
 
 
@@ -45,11 +45,11 @@ def quit_function(string):
 
 
 # this function validates guesses and
-def validate_guess(string, n=4):
+def validate_guess(string, difficulty=4):
 
-    message = "Invalid input, your input must be a 4 digit integer"
+    message = f"Invalid input, your input must be a {difficulty} digit integer"
 
-    if len(string) != n:
+    if len(string) != difficulty:
         print(message)
         return False
     try:
