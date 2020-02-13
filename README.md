@@ -52,3 +52,4 @@ Azramind is a command-line game modeled after the popular board game Mastermind.
 - I added the ability to view the rules of the game.
 - I also made the number of guesses allowed and the number of digits to guess configurable in the code, but not by the player (yet). I hope to continue building on this project to - enable the game player to configure those options as well.
 - Lastly, I added a little commentary to make the game a bit more lively.
+
