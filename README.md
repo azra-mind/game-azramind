@@ -1,15 +1,15 @@
-Azramind is a command-line game modeled after the popular board game Mastermind. It is written in Python with a backend and RESTful API written in Python/Flask, which can be found here in a separate repository (https://github.com/azra-mind/be-azramind)
+Azramind is a command-line game modeled after the popular board game Mastermind. It is written in Python with a backend and RESTful API written in Python/Flask, which can be found here in a separate repository. [Link to Azramind Backend](https://github.com/azra-mind/be-azramind)
 
 ### SOFTWARE REQUIREMENTS:
 
-- Python 3.7.4+ : https://www.python.org/download/
-- PIP package manager (automatically included in Python 3 >=3.4): https://pip.pypa.io/en/stable/installing/
+- [Python 3.7.4+](https://www.python.org/download/)
+- [PIP package manager](https://pip.pypa.io/en/stable/installing/) (automatically included in Python 3 >=3.4)
 - requests library
 
 ### INSTRUCTIONS TO RUN THE GAME PROGRAM:
 
 - Open your terminal
-- **git clone git@github.com:azra-mind/game-azramind.git** to clone the master branch of the repo
+- **git clone https://github.com/azra-mind/game-azramind.git** to clone the master branch of the repo
 - **cd game-azramind** to cd into the root directory of the repo
 - **pip3 install -r requirements.txt** to Install the requirements
 - Now you're ready to play the game!
@@ -21,7 +21,7 @@ Azramind is a command-line game modeled after the popular board game Mastermind.
 #### CODE STRUCTURE:
 
 - This repo provides the user interface for playing the game
-- To view the api written in python/flask that saves the scores, please visit the backend repository: https://github.com/azra-mind/be-azramind
+- To view the api written in python/flask that saves the scores, please visit the backend repository [here](https://github.com/azra-mind/be-azramind)
 - There are 3 main files that form the codebase for this program:
 
 #### program_logic.py
