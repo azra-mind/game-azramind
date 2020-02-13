@@ -7,8 +7,8 @@ from util import game_rules, get_code_list, quit_function
 
 
 # url for the api for the backend that I built for this project
-# BASE_API_URL = "https://azramind.herokuapp.com"
-BASE_API_URL = "http://localhost:5000"
+BASE_API_URL = "https://azramind.herokuapp.com"
+# BASE_API_URL = "http://localhost:5000"
 
 
 print("\nWelcome to Azramind! A game where you must guess the code to win. Do you have what it takes?\n\n")
