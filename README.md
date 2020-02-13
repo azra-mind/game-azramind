@@ -62,14 +62,14 @@ I spent the first day understanding and fulfilling the basic requirements for th
 
 ### WHAT'S NEXT:
 
-I plan to continue working on this project to build upon my knowledge
+I plan to continue working on this project to build upon my knowledge.
 
 #### Game Play Interface
 
 - Adding the ability for the player to configure difficult levels
 - Build out a frontend in React.js
 
-#### Backend Interface
+#### Backend
 
 - Adding unit tests to the backend repo (branch unit-tests)
 - Adding user authorization (login/password)
