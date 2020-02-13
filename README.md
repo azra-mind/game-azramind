@@ -28,14 +28,14 @@ Azramind is a command-line game modeled after the popular board game Mastermind.
 
 - contains the main logic for the game program. This is the file you run in your terminal to start the game.
 - When you run the file, you will see a main menu of 3 choice:
-  1 play the game
-  2 rules of the game
-  3 view past scores
-  q to quit game at any time
-- Upon selecting 1) Play the game, you will be prompted to enter a new or existing username.
+  - 1 play the game
+  - 2 rules of the game
+  - 3 view past scores
+  - q to quit game at any time
+- Upon selecting 1 play the game, you will be prompted to enter a new or existing username.
 - Then you will automatically drop into the game.
 - After finishing the game, your score will be saved to the database and you will return to the main menu
-- Upon selecting 3) View past scores You can observe your past scores whuch are saved in a Postgres DD
+- Upon selecting 3 view past scores, you will be prompted to enter your username to observe your past scores which are saved in a Postgres DB
 
 #### azramind_func.py
 
