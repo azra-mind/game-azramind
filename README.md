@@ -16,9 +16,7 @@ Azramind is a command-line game modeled after the popular board game Mastermind.
 - **python3 program_logic.py** to start the game program
 - Game instructions are included in the program
 
-`---------------------------------------------------`
-
-#### CODE STRUCTURE:
+### CODE STRUCTURE:
 
 - This repo provides the user interface for playing the game
 - To view the api written in python/flask that saves the scores, please visit the backend repository [here](https://github.com/azra-mind/be-azramind)
@@ -37,17 +35,15 @@ Azramind is a command-line game modeled after the popular board game Mastermind.
 - After finishing the game, your score will be saved to the database and you will return to the main menu
 - Upon selecting 3) View past scores You can observe your past scores whuch are saved in a Postgres DD
 
-### azramind_func.py
+#### azramind_func.py
 
 - contains the the function `azramind` which has the logic for the game itself
 
-### util.py
+#### util.py
 
 - contains helper functions utilized in `program_logic.py` and `azramind_func.py`
 
-`---------------------------------------------------`
-
-# GAME EXTENSIONS:
+## GAME EXTENSIONS:
 
 - I built a backend in Python/Flask to include the ability to save and retrieve past scores
 - I added the ability to view the rules of the game.
