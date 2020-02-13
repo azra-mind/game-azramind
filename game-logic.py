@@ -7,8 +7,8 @@ from util import game_rules, get_code_list, quit_function
 
 
 # url for the api for the backend that I built for this project
-BASE_API_URL = "https://azramind.herokuapp.com"
-# BASE_API_URL = "http://localhost:5000"
+# BASE_API_URL = "https://azramind.herokuapp.com"
+BASE_API_URL = "http://localhost:5000"
 
 
 print("\nWelcome to Azramind! A game where you must guess the code to win. Do you have what it takes?\n\n")
@@ -35,7 +35,8 @@ while q is False:
     difficulty = 4
 
     if command == "1":
-        print("""\n\nSo, you want to try your luck? First, you must tell me who you are. \n\n""")
+        print(
+            """\nSo, you want to try your luck? First, you must tell me who you are. \n""")
 
         # while I don't have a valid username
         user_obj = None
@@ -70,8 +71,8 @@ while q is False:
                 if command == "a":
 
                     # put the conditions for username creation here:
-                    if len(username_input) < 4:
-                        print('\nyour username must be at least 4 characters long\n')
+                    if len(username_input) < 3:
+                        print('\nyour username must be at least 3 characters long\n')
                     else:
                         response = requests.post(
                             username_url, data=username_obj).json()
@@ -135,7 +136,11 @@ while q is False:
                 print(response)
             elif 'scores' in response:
                 for score in response['scores']:
-                    print(score)
+                    print({
+                        "date and time": score["date_time"],
+                        "guesses": score["num_tries"],
+                        "digits guessed": score["difficulty"]
+                    })
             else:
                 print('something went wrong, we had trouble retrieving your scores')
 

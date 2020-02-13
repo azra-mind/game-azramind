@@ -21,17 +21,17 @@ def azramind(code_list, limit=10, difficulty=4):
     guess = None
 
     tries = 0
-    while (guess != code_str and tries < limit+1):
+    while (guess != code_str and tries < limit):
 
         guess = (input("\nEnter your guess here: "))
 
         # if user inputs q or quit, this function exits the program
         quit_function(guess)
 
-        # function that validates the guess is a 4 digit integer
+        # function that validates the guess is a {difficulty} digit integer
         valid_guess = validate_guess(guess, difficulty)
 
-        # guesses that were made.
+        # if the guess is valid ()
         if valid_guess:
             tries += 1
 
@@ -98,9 +98,9 @@ def azramind(code_list, limit=10, difficulty=4):
         print(
             f"I'm sorry, you've exceeded {limit} tries. The code is {code_str}. You'll get it next time!")
 
-    score_json_obj = {
-        "difficulty": limit,
+    score_obj = {
+        "difficulty": difficulty,
         'num_tries': tries,
     }
 
-    return score_json_obj
+    return score_obj
