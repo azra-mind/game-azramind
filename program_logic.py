@@ -19,7 +19,7 @@ while q is False:
 
     command = input(
         '''Please enter a command:
-    1 Play the game
+    1 play the game
     2 rules of the game
     3 view past scores
     q to quit game at any time
