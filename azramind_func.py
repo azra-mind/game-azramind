@@ -7,7 +7,7 @@ from util import quit_function, validate_guess
 def azramind(code_list, limit=10, difficulty=4):
 
     # uncomment below to see the code list for debugging etc:
-    print(code_list)
+    # print(code_list)
 
     code_str = "".join(code_list)
 
