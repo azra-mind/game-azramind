@@ -10,11 +10,11 @@ Azramind is a command-line game modeled after the popular board game Mastermind.
 ### INSTRUCTIONS TO RUN THE GAME PROGRAM:
 
 - Open your terminal
-- **git clone git@github.com:azra-mind/game-azramind.git** to clone the master branch of the repo
-- **cd game-azramind** to cd into the root directory of the repo
-- **pip3 install -r requirements.txt** to Install the requirements
+- `git clone git@github.com:azra-mind/game-azramind.git` to clone the master branch of the repo
+- `cd game-azramind` to cd into the root directory of the repo
+- `pip3 install -r requirements.txt` to Install the requirements
 - Now you're ready to play the game!
-- **python3 program_logic.py** to start the game program
+- `python3 program_logic.py` to start the game program
 - Game instructions are included in the program
 
 
