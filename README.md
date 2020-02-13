@@ -1,3 +1,4 @@
+
 Azramind is a command-line game modeled after the popular board game Mastermind. It is written in Python with a backend and RESTful API written in Python/Flask, which can be found here in a separate repository (https://github.com/azra-mind/be-azramind)
 
 ### SOFTWARE REQUIREMENTS:
