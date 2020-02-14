@@ -139,7 +139,7 @@ while q is False:
                     print({
                         "date and time": score["date_time"],
                         "guesses": score["num_tries"],
-                        "digits guessed": score["difficulty"]
+                        "digits in code": score["difficulty"]
                     })
             else:
                 print('something went wrong, we had trouble retrieving your scores')
