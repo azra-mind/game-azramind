@@ -15,8 +15,6 @@ print("\nWelcome to Azramind! A game where you must guess the code to win. Do yo
 q = False
 while q is False:
 
-    # number of tries a player gets to guess the code.
-
     command = input(
         '''Please enter a command:
     1 play the game
@@ -109,9 +107,10 @@ while q is False:
         except:
             print("the code couldn't be generated, we can't play the game!")
 
-        # this is
+        # this is the function for the game logic. It returns a score
         score_obj = azramind(code_list, limit, difficulty)
 
+        # saving the score in the database
         score_obj["user_id"] = user_obj["id"]
         score_url = f"{BASE_API_URL}/score"
 
