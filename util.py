@@ -62,8 +62,8 @@ def validate_guess(string, difficulty=4):
 
 
 # this function posts the username to the db and returns it in an object
-# args are: quit_function to enable user exit, and API url to ping the DB
-def post_and_return_username(quit_function, BASE_API_URL):
+# args are: quit_function to enable user exit, API url to ping the DB, requests
+def post_and_return_username(quit_function, BASE_API_URL, requests):
 
     # initializing the response object
     response = None

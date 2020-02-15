@@ -43,7 +43,8 @@ while q is False:
         while user_obj is None:
 
             # function inside util.py. Post the username to the db an return a user json object
-            user_obj = post_and_return_username(quit_function, BASE_API_URL)
+            user_obj = post_and_return_username(
+                quit_function, BASE_API_URL, requests)
 
         # URL to access the random number generator API
         INT_URL = "https://www.random.org/integers/"
