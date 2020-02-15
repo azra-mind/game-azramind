@@ -43,7 +43,6 @@ def quit_function(string):
 
         sys.exit("\nthank you for playing Azramind, good bye\n")
 
-
 # this function validates guesses
 def validate_guess(string, difficulty=4):
 
