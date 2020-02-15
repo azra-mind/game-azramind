@@ -3,8 +3,15 @@ from requests.exceptions import HTTPError
 import sys
 from util import quit_function, validate_guess
 
+# this file contains the main game play function
 
-def azramind(code_list, limit=10, difficulty=4):
+# args:
+# quit_function lets user quit anytime.
+# validate_guess function checks if the guess the user entered is a valid input
+# limit is the number of tries, difficulty is the number of digits in the secret code
+
+
+def azramind(quit_function, validate_guess, code_list, limit=10, difficulty=4):
 
     # uncomment below to see the code list for debugging etc:
     # print(code_list)
