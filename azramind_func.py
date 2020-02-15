@@ -89,14 +89,14 @@ def azramind(code_list, limit=10, difficulty=4):
 
     # out of the while loopconditions for equality or reaching the guess limit
     if guess == code_str:
-        print("You've become a Mastermind!")
+        print("\nYou've become a Mastermind!")
         if tries == 1:
-            print(f"WHOA!! You guessed it right on the first try that's impressive!!")
+            print(f"\nWHOA!! You guessed it right on the first try that's impressive!!\n")
         else:
-            print(f"It took you {tries} tries.")
+            print(f"It took you {tries} tries.\n")
     else:
         print(
-            f"I'm sorry, you've exceeded {limit} tries. The code is {code_str}. You'll get it next time!")
+            f"I'm sorry, you've exceeded {limit} tries. The code is {code_str}. You'll get it next time!\n")
 
     score_obj = {
         "difficulty": difficulty,
