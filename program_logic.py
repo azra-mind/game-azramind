@@ -3,7 +3,7 @@ from requests.exceptions import HTTPError
 import sys
 
 from azramind_func import azramind
-from util import game_rules, get_code_list, quit_function
+from util import game_rules, get_code_list, quit_function, post_and_return_username
 
 
 # url for the api for the backend that I built for this project
@@ -41,51 +41,9 @@ while q is False:
 
         # this loop saves the username object so we can save scores
         while user_obj is None:
-            # initializing the response object
-            response = None
-            command = input(
-                '''Enter a command:
-            a create a new username
-            b enter an existing username
-                ''')
 
-            command = command.lower().strip()
-
-            # quit if user enters q or quit
-            quit_function(command)
-
-            if command not in {'a', 'b'}:
-                print('\nInvalid input, please enter a or b\n')
-
-            else:
-                username_input = input("Enter username: ").lower().strip()
-
-                # quit if user enters q or quit
-                quit_function(username_input)
-
-                username_obj = {"username": f"{username_input}"}
-                username_url = f"{BASE_API_URL}/user"
-
-                if command == "a":
-
-                    # put the conditions for username creation here:
-                    if len(username_input) < 3:
-                        print('\nyour username must be at least 3 characters long\n')
-                    else:
-                        response = requests.post(
-                            username_url, data=username_obj).json()
-
-                if command == "b":
-
-                    response = requests.get(
-                        username_url, data=username_obj).json()
-
-            if response:
-                if 'username' in response:
-                    user_obj = response
-                    print(f"Hello, {response['username']}")
-                if 'message' in response:
-                    print(response['message'])
+            # function inside util.py. Post the username to the db an return a user json object
+            user_obj = post_and_return_username(quit_function, BASE_API_URL)
 
         # URL to access the random number generator API
         INT_URL = "https://www.random.org/integers/"
@@ -121,8 +79,7 @@ while q is False:
         game_rules(limit, difficulty)
 
     elif command == "3":
-        username = input(
-            "Please enter your username to view past scores: ")
+        username = input("Please enter your username to view past scores: ")
 
         # quit if user enters q or quit
         quit_function(username)
