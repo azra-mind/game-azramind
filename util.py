@@ -9,14 +9,14 @@ def get_code_list(URL, PARAMS):
     try:
         response = requests.get(
             url=URL, params=PARAMS)
-        # If the response was successful, no Exception will be raised
+        # If the response was successful, no exception will be raised
         response.raise_for_status()
     except HTTPError as http_err:
-        # Python 3.6
+
         sys.exit(
             f'HTTP error, unable to generate code from random Integer API: {http_err}')
     except Exception as err:
-        # Python 3.6
+
         sys.exit(
             f'Other error occurred, unable to generate code from random Integer API: {err}')
 
@@ -110,6 +110,7 @@ def post_and_return_username(quit_function, BASE_API_URL, requests):
 
             print(f"Hello, {response['username']}")
             return response
-    # print error message if no username
+
+        # print error message if no username
         if 'message' in response:
             print(response['message'])

@@ -3,7 +3,7 @@ from requests.exceptions import HTTPError
 import sys
 
 from azramind_func import azramind
-from util import game_rules, get_code_list, quit_function, post_and_return_username
+from util import game_rules, get_code_list, quit_function, post_and_return_username, validate_guess
 
 
 # url for the api for the backend that I built for this project
@@ -39,7 +39,7 @@ while q is False:
         # while I don't have a valid username
         user_obj = None
 
-        # this loop saves the username object so we can save scores
+        # this loop saves the username so we can save scores
         while user_obj is None:
 
             # function inside util.py. Post the username to the db an return a user json object
@@ -66,10 +66,11 @@ while q is False:
         except:
             print("the code couldn't be generated, we can't play the game!")
 
-        # this is the function for the game logic. It returns a score
-        score_obj = azramind(code_list, limit, difficulty)
+        # this is the main function for the game logic. It returns a game score
+        score_obj = azramind(quit_function, validate_guess,
+                             code_list, limit=10, difficulty=4)
 
-        # saving the score in the database
+        # creating the score json object and urls
         score_obj["user_id"] = user_obj["id"]
         score_url = f"{BASE_API_URL}/score"
 
