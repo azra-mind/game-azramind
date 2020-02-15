@@ -47,9 +47,12 @@ def quit_function(string):
 # this function validates guesses
 def validate_guess(string, difficulty=4):
 
-    message = f"Invalid input, your input must be a {difficulty} digit integer"
+    message = f"Invalid input, your input must be a {difficulty} digit integer between 0 and 7"
 
     if len(string) != difficulty:
+        print(message)
+        return False
+    if "8" in string or "9" in string:
         print(message)
         return False
     try:
