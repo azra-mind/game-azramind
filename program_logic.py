@@ -8,7 +8,7 @@ from util import game_rules, get_code_list, quit_function, post_and_return_usern
 
 # url for the api for the backend that I built for this project
 BASE_API_URL = "https://azramind.herokuapp.com"
-#BASE_API_URL = "http://localhost:5000"
+# BASE_API_URL = "http://localhost:5000"
 
 
 print("\nWelcome to Azramind! A game where you must guess the code to win. Do you have what it takes?\n\n")
@@ -96,23 +96,20 @@ while q is False:
             response = requests.get(url=get_scores_url)
             response.raise_for_status()
         except requests.exceptions.HTTPError as err:
-            print(
-                f"something went wrong trying to retrieve your game score", err, "\n")
+            if response.status_code == 404:
+                print(response.json(), response.status_code)
+            else:
+                print(
+                    f"something went wrong trying to retrieve your game score", err, "\n")
 
         if response:
-            r_json = response.json()
-            # when scores not found for that username, we show the message
-            if 'message' in r_json:
-                print(r_json)
-            elif 'scores' in r_json:
-                for score in r_json['scores']:
-                    print({
-                        "date and time": score["date_time"],
-                        "guesses": score["num_tries"],
-                        "digits in code": score["difficulty"]
-                    })
-            else:
-                print('something went wrong, we had trouble retrieving your scores\n')
+            scores = response.json()
+            for score in scores['scores']:
+                print({
+                    "date and time": score["date_time"],
+                    "guesses": score["num_tries"],
+                    "digits in code": score["difficulty"]
+                })
 
     elif command in {"q", "quit"}:
         print("thank you for playing, good bye")
