@@ -104,6 +104,8 @@ def azramind(code_list, limit=10, difficulty=4):
     else:
         print(
             f"I'm sorry, you've exceeded {limit} tries. The code is {code_str}. You'll get it next time!\n")
+        # to indicate in the scores table that the user exceeded 10 tries, didn't win
+        tries = limit+1
 
     score_obj = {
         "difficulty": difficulty,
