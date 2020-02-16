@@ -11,7 +11,7 @@ from util import quit_function, validate_guess
 # limit is the number of tries, difficulty is the number of digits in the secret code
 
 
-def azramind(quit_function, validate_guess, code_list, limit=10, difficulty=4):
+def azramind(code_list, limit=10, difficulty=4):
 
     # uncomment below to see the code list for debugging etc:
     # print(code_list)
@@ -94,9 +94,9 @@ def azramind(quit_function, validate_guess, code_list, limit=10, difficulty=4):
                 for g in guess_results:
                     print(g)
 
-    # out of the while loopconditions for equality or reaching the guess limit
+    # out of the while loop conditions for equality or reaching the guess limit
     if guess == code_str:
-        print("\nYou've become a Mastermind!")
+        print("\nYou've conquered Azramind!")
         if tries == 1:
             print(f"\nWHOA!! You guessed it right on the first try that's impressive!!\n")
         else:
