@@ -7,6 +7,7 @@ I had a lot of fun building this game! I hope you enjoy playing it.
 - [Python 3.7.4+](https://www.python.org/download/)
 - [PIP package manager](https://pip.pypa.io/en/stable/installing/) (automatically included in Python 3 >=3.4)
 - requests library
+- an internet connection
 
 ### INSTRUCTIONS TO RUN THE GAME PROGRAM:
 
@@ -67,7 +68,9 @@ I plan to continue working on this project to build upon my knowledge.
 #### Game Play Interface
 
 - Add the ability for the player to configure difficult levels
+- better error handling for no internet connection
 - Build out a frontend in React.js
+- ability to play in offline mode
 
 #### Backend
 
