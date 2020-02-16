@@ -39,7 +39,7 @@ while q is False:
         # while I don't have a valid username
         user_obj = None
 
-        # this loop saves the username so we can save scores
+        # this loop runs until we have a user_obj for saving scores after game over
         while user_obj is None:
 
             # function inside util.py. Post the username to the db an return a user json object
