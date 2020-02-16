@@ -106,8 +106,11 @@ def post_and_return_username(BASE_API_URL):
                         username_url, data=username_obj)
                     response.raise_for_status()
                 except requests.exceptions.HTTPError as err:
-                    print(
-                        f"something went wrong creating username {username_input}", err, "\n")
+                    if response.status_code == 400:
+                        print(response.json(), response.status_code)
+                    else:
+                        print(
+                            f'something went wrong creating user {username_input}', err)
 
         if command == "b":
             try:
@@ -115,19 +118,16 @@ def post_and_return_username(BASE_API_URL):
                     username_url, data=username_obj)
                 response.raise_for_status()
             except requests.exceptions.HTTPError as err:
-                print(
-                    f"something went wrong finding username {username_input}", err, "\n")
+                if response.status_code == 404:
+                    print(response.json(), response.status_code)
+                else:
+                    print(
+                        f'something went wrong finding user {username_input}', err)
             # response = requests.get(username_url, data=username_obj).json()
 
     if response:
-        r_json = response.json()
-
         # return response if username is there
-        if 'username' in r_json:
-
-            print(f"Hello, {r_json['username']}")
-            return r_json
-
-        # print error message if no username
-        if 'message' in r_json:
-            print(r_json['message'])
+        user = response.json()
+        if 'username' in user:
+            print(f"Hello, {user['username']}")
+        return user
