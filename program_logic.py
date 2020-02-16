@@ -7,8 +7,8 @@ from util import game_rules, get_code_list, quit_function, post_and_return_usern
 
 
 # url for the api for the backend that I built for this project
-BASE_API_URL = "https://azramind.herokuapp.com"
-#BASE_API_URL = "http://localhost:5000"
+#BASE_API_URL = "https://azramind.herokuapp.com"
+BASE_API_URL = "http://localhost:5000"
 
 
 print("\nWelcome to Azramind! A game where you must guess the code to win. Do you have what it takes?\n\n")
@@ -43,8 +43,7 @@ while q is False:
         while user_obj is None:
 
             # function inside util.py. Post the username to the db an return a user json object
-            user_obj = post_and_return_username(
-                quit_function, BASE_API_URL, requests)
+            user_obj = post_and_return_username(BASE_API_URL)
 
         # URL to access the random number generator API
         INT_URL = "https://www.random.org/integers/"
@@ -67,15 +66,20 @@ while q is False:
             print("the code couldn't be generated, we can't play the game!")
 
         # this is the main function for the game logic. It returns a game score
-        score_obj = azramind(quit_function, validate_guess,
-                             code_list, limit=10, difficulty=4)
+        score_obj = azramind(code_list, limit=10, difficulty=4)
 
         # creating the score json object and urls
         score_obj["user_id"] = user_obj["id"]
         score_url = f"{BASE_API_URL}/score"
 
         # posting the score to the scores table
-        response = requests.post(score_url, data=score_obj).json()
+
+        try:
+            response = requests.post(score_url, data=score_obj)
+            response.raise_for_status()
+        except requests.exceptions.HTTPError as err:
+            print(
+                f"something went wrong trying to save your game score", err, "\n")
 
     elif command == "2":
         game_rules(limit, difficulty)
@@ -86,22 +90,29 @@ while q is False:
         # quit if user enters q or quit
         quit_function(username)
 
-        GET_SCORES_URL = f"{BASE_API_URL}/{username}/scores"
+        get_scores_url = f"{BASE_API_URL}/{username}/scores"
 
-        response = requests.get(url=GET_SCORES_URL).json()
+        try:
+            response = requests.get(url=get_scores_url)
+            response.raise_for_status()
+        except requests.exceptions.HTTPError as err:
+            print(
+                f"something went wrong trying to retrieve your game score", err, "\n")
 
         if response:
-            if 'message' in response:
-                print(response)
-            elif 'scores' in response:
-                for score in response['scores']:
+            r_json = response.json()
+            # when scores not found for that username, we show the message
+            if 'message' in r_json:
+                print(r_json)
+            elif 'scores' in r_json:
+                for score in r_json['scores']:
                     print({
                         "date and time": score["date_time"],
                         "guesses": score["num_tries"],
                         "digits in code": score["difficulty"]
                     })
             else:
-                print('something went wrong, we had trouble retrieving your scores')
+                print('something went wrong, we had trouble retrieving your scores\n')
 
     elif command in {"q", "quit"}:
         print("thank you for playing, good bye")

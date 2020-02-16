@@ -40,7 +40,6 @@ def game_rules(limit=10, difficulty=4):
 
 def quit_function(string):
     if string.lower() in {"q", "quit"}:
-
         sys.exit("\nthank you for playing Azramind, good bye\n")
 
 # this function validates guesses
@@ -67,7 +66,7 @@ def validate_guess(string, difficulty=4):
 
 # this function posts the username to the db and returns it in an object
 # args are: quit_function to enable user exit, API url to ping the DB, requests
-def post_and_return_username(quit_function, BASE_API_URL, requests):
+def post_and_return_username(BASE_API_URL):
 
     # initializing the response object
     response = None
@@ -86,7 +85,8 @@ def post_and_return_username(quit_function, BASE_API_URL, requests):
         print('\nInvalid input, please enter a or b\n')
 
     else:
-        username_input = input("Enter username: ").lower().strip()
+        username_input = input(
+            "Enter username (case insensitive): ").lower().strip()
 
         # quit if user enters q or quit
         quit_function(username_input)
@@ -101,20 +101,33 @@ def post_and_return_username(quit_function, BASE_API_URL, requests):
                 print(
                     '\nyour username must be at least 3 characters long\n')
             else:
-                response = requests.post(
-                    username_url, data=username_obj).json()
+                try:
+                    response = requests.post(
+                        username_url, data=username_obj)
+                    response.raise_for_status()
+                except requests.exceptions.HTTPError as err:
+                    print(
+                        f"something went wrong creating username {username_input}", err, "\n")
 
         if command == "b":
-
-            response = requests.get(username_url, data=username_obj).json()
+            try:
+                response = requests.get(
+                    username_url, data=username_obj)
+                response.raise_for_status()
+            except requests.exceptions.HTTPError as err:
+                print(
+                    f"something went wrong finding username {username_input}", err, "\n")
+            # response = requests.get(username_url, data=username_obj).json()
 
     if response:
-        # return response if username is there
-        if 'username' in response:
+        r_json = response.json()
 
-            print(f"Hello, {response['username']}")
-            return response
+        # return response if username is there
+        if 'username' in r_json:
+
+            print(f"Hello, {r_json['username']}")
+            return r_json
 
         # print error message if no username
-        if 'message' in response:
-            print(response['message'])
+        if 'message' in r_json:
+            print(r_json['message'])
