@@ -7,8 +7,8 @@ from util import game_rules, get_code_list, quit_function, post_and_return_usern
 
 
 # url for the api for the backend that I built for this project
-#BASE_API_URL = "https://azramind.herokuapp.com"
-BASE_API_URL = "http://localhost:5000"
+BASE_API_URL = "https://azramind.herokuapp.com"
+#BASE_API_URL = "http://localhost:5000"
 
 
 print("\nWelcome to Azramind! A game where you must guess the code to win. Do you have what it takes?\n\n")
@@ -39,7 +39,7 @@ while q is False:
         # while I don't have a valid username
         user_obj = None
 
-        # this loop saves the username so we can save scores
+        # this loop runs until we have a user_obj for saving scores after game over
         while user_obj is None:
 
             # function inside util.py. Post the username to the db an return a user json object
