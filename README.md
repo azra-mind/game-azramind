@@ -66,7 +66,7 @@ I plan to continue working on this project to build upon my knowledge.
 
 #### Game Play Interface
 
-- Add the ability for the player to configure difficult levels
+- Add the ability for the player to configure difficulty levels
 - better error handling for no internet connection
 - Build out a frontend in React.js
 - ability to play in offline mode
